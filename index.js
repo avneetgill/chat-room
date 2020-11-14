@@ -38,12 +38,12 @@ io.on('connection', (socket) => {
     let color = "";
 
     if (userCookie && !onlineUsers.includes(userCookie)) {
-      console.log(userCookie)
+      console.log(userCookie + " index")
       username = userCookie;
     }
     else{
       username = `user${onlineUsers.length}`
-      console.log(username)
+
     }
     
     onlineUsers.push(username);
@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
     socket.emit("current user", username);
     
     io.emit("user connected", onlineUsers);
-    console.log(userCookie)
+    
     chatLog.forEach((c) => {
         socket.emit("chat message", c);
     });

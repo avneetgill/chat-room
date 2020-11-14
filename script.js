@@ -1,4 +1,4 @@
-let currentUser = "";
+let myUser = "";
 $(function () {
     var socket = io();
     $('form').submit(function(e){
@@ -9,9 +9,9 @@ $(function () {
     });
 
     socket.on("current user", function (username) {
-      currentUser = username;
-      document.cookie = `username=${currentUser};max-age=${60 * 60};`;
-      console.log(document.cookie);
+      myUser = username;
+      document.cookie = `username=${myUser};max-age=${60 * 30};`;
+      console.log(document.cookie + " script");
     });
 
     socket.on('admin message', function(msg){
@@ -51,15 +51,17 @@ $(function () {
     $("#messages").append(messageHtml);
     });
    
-    socket.on("user connected", function (users) {
-      $("#users").empty();
-      $("#users").append(
-        `<div style="font-weight:bold;" class="${currentUser}">${currentUser} (You)</div>`
+    socket.on("user connected", function (onlineUsers) {
+      $("#onlineUsers").empty();
+      $("#onlineUsers").append(
+        `<div style="font-weight:bold;" class="${myUser}">${myUser} (ME)</div>`
       );
-      users.forEach((u) => {
- 
-        if (u !== currentUser) {
-          $("#users").append(`<div class="${u}">${u}</div>`);
+      
+      $("#onlineUsers").append(`<div class=>************</div>`);
+    
+      onlineUsers.forEach((u) => {
+        if (u !== myUser) {
+          $("#onlineUsers").append(`<div class="${u}">${u}</div>`);
         }
       });
     });
@@ -84,10 +86,10 @@ $(function () {
   });
 
   function getMessageHTML(user, time, msg, color) {
-    if (currentUser === user) {
-      return `<div class="chat-item">
-                <div class="content-wrapper c-you">
-                    <div class="message m-you">${msg}</div>
+    if (myUser === user) {
+      return `<div class="chat-div">
+                <div class="m-wrapper c-you">
+                    <div class="message from-me">${msg}</div>
                     <div class="user-wrapper">
                         <span style="color:${color};" class="user ${user} ${user}-color u-you">${user}</span>
                         <span style="color:#353535">${time}</span>
@@ -95,8 +97,8 @@ $(function () {
                 </div>
               </div>`;
     } else {
-      return `<div class="chat-item">
-                <div class="content-wrapper">
+      return `<div class="chat-div">
+                <div class="m-wrapper">
                     <div class="user-wrapper">
                         <span style="color:${color};" class="user ${user} ${user}-color">${user}</span>
                         <span style="color:#353535">${time}</span>

@@ -53,11 +53,11 @@ body {
   }
   
   
-  .chat-item {
+  .chat-div {
     padding: 10px;
   }
   
-  .content-wrapper {
+  .m-wrapper {
     display: flex;
     width: 95%;
     margin: 0 auto;
@@ -92,10 +92,25 @@ body {
     line-height: 1.5;
   }
   
-  .m-you {
+  .from-me {
     margin-left: 0px;
     margin-right: 15px;
     background-color: lightskyblue;
+  }
+  
+
+  .current-users {
+    padding: 10px;
+    border-radius: 15px;
+    height: 92%;
+    margin-top: 8px;
+    border-color: lightgray;
+    background-color: lightgray;
+  }
+  
+
+  .current-users div {
+    margin-bottom: 8px;
   }
   
  
@@ -111,18 +126,7 @@ body {
     font-weight: bold;
   }
   
-  .current-users {
-    padding: 10px;
-    border-radius: 15px;
-    height: 92%;
-    margin-top: 8px;
-    border-color: lightgray;
-    background-color: lightgray;
-  }
   
-  .current-users div {
-    margin-bottom: 8px;
-  }
   
 
   @media only screen and (min-width: 960px) {
